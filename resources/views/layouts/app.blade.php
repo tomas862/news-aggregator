@@ -60,6 +60,9 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                        <a href="{{ url('change-password') }}">
+                                            Change password
+                                        </a>
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -77,8 +80,10 @@
                 </div>
             </div>
         </nav>
-
-        @yield('content')
+        <div class="container">
+            @yield('content')
+            @yield('changePassword')
+        </div>
     </div>
 
     <!-- Scripts -->

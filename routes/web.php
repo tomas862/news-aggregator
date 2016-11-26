@@ -17,4 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->middleware('auth');
+Route::get('/change-password', 'Auth\ChangePasswordController@index')->middleware('auth');
+Route::post('/', 'Auth\ChangePasswordController@changePasswordAction');
+
