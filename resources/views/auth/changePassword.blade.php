@@ -1,8 +1,18 @@
 @extends('layouts.app')
 
 @section('changePassword')
-    {{ Form::open(['action' => 'ChangePasswordController@changePasswordAction', 'class' => 'form-horizontal']) }}
+    {{ Form::open(['action' => 'Auth\ChangePasswordController@changePasswordAction', 'class' => 'form-horizontal']) }}
     <div class="col-lg-6 col-lg-offset-3">
+
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="panel panel-default">
             <div class="panel-heading">
                 Change your credentials
@@ -19,15 +29,15 @@
                     </div>
                     <div class="form-group">
                         {{ Form::label('old_password', 'Old password') }}
-                        {{ Form::text('old_password', null,  ['class' => 'form-control']) }}
+                        {{ Form::password('old_password', ['class' => 'form-control']) }}
                     </div>
                     <div class="form-group">
                         {{ Form::label('new_password', 'New password') }}
-                        {{ Form::text('new_password', null, ['class' => 'form-control']) }}
+                        {{ Form::password('new_password', ['class' => 'form-control']) }}
                     </div>
                     <div class="form-group">
                         {{ Form::label('repeat_password', 'Repeat new password') }}
-                        {{ Form::text('repeat_password', null, ['class' => 'form-control']) }}
+                        {{ Form::password('repeat_password', ['class' => 'form-control']) }}
                     </div>
                 </div>
             </div>
