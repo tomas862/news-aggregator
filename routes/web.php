@@ -18,9 +18,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->middleware('auth');
+Route::get('/categories', 'Admin\CategoryController@index')->middleware('auth');
+Route::get('/feeds', 'Admin\FeedController@index')->middleware('auth');
 Route::get('/change-password', 'Auth\ChangePasswordController@index')->middleware('auth');
-Route::get('/addFeed', 'Feed\AddFeedController@index')->middleware('auth');
-Route::get('/addFeed', 'Feed\AddFeedCategoryController@index')->middleware('auth');
+Route::get('/addFeed', function() {
+    return view('admin/addFeed');
+})->middleware('auth');
+Route::get('/addCategory', function() {
+    return view('admin/addFeedCategory');
+})->middleware('auth');
 
 Route::post('/', 'Auth\ChangePasswordController@changePasswordAction');
-Route::post('/', 'Feed\AddFeedController@addFeedAction');
+Route::post('/feeds', 'Admin\FeedController@addFeedAction');
+Route::post('/categories', 'Admin\CategoryController@addFeedCategoryAction');

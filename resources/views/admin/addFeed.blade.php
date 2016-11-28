@@ -5,16 +5,12 @@
             <div class="panel-heading">
                 Add feed
             </div>
-            {{ Form::open(['action' => 'Feed\AddFeedController@addFeedAction', 'class' => 'form-horizontal']) }}
+            {{ Form::open(['action' => 'Admin\FeedController@addFeedAction', 'class' => 'form-horizontal']) }}
             <div class="panel-body">
                 <div class="col-lg-12">
                     <div class="form-group">
                         {{ Form::label('feed_url', 'Enter feed url') }}
                         {{ Form::text('feed_url', null, ['class' => 'form-control']) }}
-                    </div>
-                    <div class="form-group">
-                        {{ Form::label('category', 'Category') }}
-                        {{ Form::text('category', null, ['class' => 'form-control']) }}
                     </div>
                 </div>
             </div>

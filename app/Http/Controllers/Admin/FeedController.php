@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Feed;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 
-class AddFeedController extends Controller
+class FeedController extends Controller
 {
     public function index()
     {
-        return view('addFeed');
+        return view('admin/adminFeedCrud');
     }
 
     public function addFeedAction(\Illuminate\Http\Request $request)
@@ -20,6 +21,8 @@ class AddFeedController extends Controller
         if (!$request->feed_url) {
             return Redirect::back()->withErrors(['Please provide valid url address']);
         }
+
+        return redirect('feeds');
     }
 }
 
