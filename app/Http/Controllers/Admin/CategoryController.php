@@ -13,7 +13,13 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return view('admin/adminCategoryCrud');
+        $categoryModel = new CategoryModel();
+        $categories = $categoryModel::all();
+
+        return view('admin/adminCategoryCrud', [
+            'categories' => $categories,
+            'is_category' => $categoryModel->exists()
+        ]);
     }
 
     public function addFeedCategoryAction(\Illuminate\Http\Request $request)

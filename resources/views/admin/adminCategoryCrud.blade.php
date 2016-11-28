@@ -19,19 +19,41 @@
                 <div class="clearfix">
                     &nbsp;
                 </div>
-                <table class="table table-hover">
-                    <thead>
-                    <tr>Feeds</tr>
-                    <tr>
-                        <td>Id</td>
-                        <td>Link</td>
-                        <td>Category</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
+                <div class="clearfix">
+                    &nbsp;
+                </div>
+                @if ($is_category)
+                        <table class="table table-hover table-bordered table-striped table-default table-condensed table-responsive">
+                            <thead>
+                            <tr>Categories</tr>
+                            <tr>
+                                <th class="col-md-2">Id</th>
+                                <th class="col-md-8">Name</th>
+                                <th class="col-md-2"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($categories as $category)
+                                    <tr>
+                                        <td class="col-md-2">{{ $category->id }}</td>
+                                        <td class="col-md-2">{{ $category->name }}</td>
+                                        <td class="col-md-2">
+                                            <a class="btn btn-default" href="{{ url('/addFeed/'.$category->id) }}">
+                                                <i class="glyphicon glyphicon-edit"></i>&nbsp;Edit
+                                            </a>
+                                            <a class="btn btn-danger">
+                                                <i class="glyphicon glyphicon-remove"></i>&nbsp;Remove
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @else
+                        <div class="alert alert-info">
+                            There are currently no categories.
+                        </div>
+                @endif
             </div>
         </div>
     </div>

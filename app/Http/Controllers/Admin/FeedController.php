@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 
+
 class FeedController extends Controller
 {
     public function index()
