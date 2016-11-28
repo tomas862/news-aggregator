@@ -38,7 +38,7 @@
                                         <td class="col-md-2">{{ $category->id }}</td>
                                         <td class="col-md-2">{{ $category->name }}</td>
                                         <td class="col-md-2">
-                                            <a class="btn btn-default" href="{{ url('/addFeed/'.$category->id) }}">
+                                            <a class="btn btn-default" href="{{ url('/addCategory/'.$category->id) }}">
                                                 <i class="glyphicon glyphicon-edit"></i>&nbsp;Edit
                                             </a>
                                             <a class="btn btn-danger">

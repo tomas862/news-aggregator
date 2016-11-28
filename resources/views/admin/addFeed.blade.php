@@ -16,7 +16,7 @@
             </div>
             <div class="panel-footer">
                 <div class="pull-left">
-                    <a href="{{ url('/home') }}" class="btn btn-default">
+                    <a href="{{ url('/feeds') }}" class="btn btn-default">
                         <i class="glyphicon glyphicon-remove"></i>&nbsp;Cancel
                     </a>
                 </div>
