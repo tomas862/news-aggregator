@@ -21,9 +21,11 @@ Route::get('/home', 'HomeController@index')->middleware('auth');
 Route::get('/categories', 'Admin\CategoryController@index')->middleware('auth');
 Route::get('/feeds', 'Admin\FeedController@index')->middleware('auth');
 Route::get('/change-password', 'Auth\ChangePasswordController@index')->middleware('auth');
+
 Route::get('/addFeed/{id?}', function() {
     return view('admin/addFeed');
 })->middleware('auth');
+
 Route::get('/addCategory/{id?}', function($id_category = 0) {
     $categoryModel = App\CategoryModel::find($id_category);
     return view(
@@ -34,6 +36,8 @@ Route::get('/addCategory/{id?}', function($id_category = 0) {
         ]
     );
 })->middleware('auth');
+
+Route::get('/removeCategory/{id}', 'Admin\CategoryController@removeCategoryAction')->middleware('auth');
 
 Route::post('/', 'Auth\ChangePasswordController@changePasswordAction');
 Route::post('/feeds', 'Admin\FeedController@feedActionAdd');

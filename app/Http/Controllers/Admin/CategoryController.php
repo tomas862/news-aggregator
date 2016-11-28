@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categoryModel = new CategoryModel();
-        $categories = $categoryModel::all();
+        $categories = $categoryModel::paginate(Config::get('constants.ADMIN_PAGE_COUNT'));
 
         return view('admin/adminCategoryCrud', [
             'categories' => $categories,
@@ -54,11 +54,34 @@ class CategoryController extends Controller
         if ($request->has('submit_and_stay_category')) {
             $url = 'addCategory';
             $url .= ($id_category) ? '/'.$id_category : '';
-            
+
             return Redirect($url);
         }
 
         return Redirect('categories');
+    }
+
+    public function removeCategoryAction()
+    {
+        $id_category = (int)Route::current()->getParameter('id');
+
+        if (!$id_category) {
+            return Redirect::back()->withErrors(['No data provided for remove process']);
+        }
+
+        $categoryModel = CategoryModel::find($id_category);
+
+        if (!$categoryModel) {
+            return Redirect::back()->withErrors(['Unable to find category']);
+        }
+
+        if (!$categoryModel->delete()) {
+            return Redirect::back()->withErrors(['Failed to delete category']);
+        }
+
+        Session::flash('success_message', Config::get('constants.SUCCESS_DELETE'));
+        return Redirect('categories');
+
     }
 }
 

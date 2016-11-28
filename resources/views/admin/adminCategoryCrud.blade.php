@@ -4,6 +4,16 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
                 @if (Session::has('success_message'))
                     <div class="alert alert-success">
@@ -41,7 +51,7 @@
                                             <a class="btn btn-default" href="{{ url('/addCategory/'.$category->id) }}">
                                                 <i class="glyphicon glyphicon-edit"></i>&nbsp;Edit
                                             </a>
-                                            <a class="btn btn-danger">
+                                            <a class="btn btn-danger" href="{{ url('/removeCategory/'.$category->id) }}">
                                                 <i class="glyphicon glyphicon-remove"></i>&nbsp;Remove
                                             </a>
                                         </td>
@@ -49,6 +59,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        {{ $categories->links() }}
                     @else
                         <div class="alert alert-info">
                             There are currently no categories.
