@@ -11,6 +11,7 @@ use App\FeedModel;
 use App\FeedCategoryModel;
 use Session;
 use Config;
+use Route;
 
 class FeedController extends Controller
 {
@@ -74,6 +75,29 @@ class FeedController extends Controller
 
         if ($request->has('submit_and_stay_feed')) {
             return Redirect::back();
+        }
+
+        return Redirect('/feeds');
+    }
+
+    public function removeFeedAction()
+    {
+        $id_feed = (int)Route::current()->getParameter('id');
+
+        if (!$id_feed) {
+            return Redirect::back()->withErrors(['No feed provided']);
+        }
+
+        $feedModel = FeedModel::find($id_feed);
+
+        if (!$feedModel) {
+            return Redirect::back()->withErrors(['Unable to find feed']);
+        }
+
+        FeedCategoryModel::where('feed_id', $id_feed)->delete();
+
+        if (!$feedModel->delete()) {
+            return Redirect::back()->withErrors(['Failed to delete feed']);
         }
 
         return Redirect('/feeds');

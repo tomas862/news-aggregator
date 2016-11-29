@@ -50,12 +50,13 @@
                                            @endif
                                        </td>
                                        <td class="col-md-2">
-                                           <a class="btn btn-danger">
+                                           <a class="btn btn-danger" href="{{ url('/removeFeed/'.$feed->id) }}">
                                                <i class="glyphicon glyphicon-remove"></i>&nbsp;Remove
                                            </a>
                                        </td>
                                     </tr>
                                 @endforeach
+                                {{ $feeds->links() }}
                         </tbody>
                     </table>
                     @else

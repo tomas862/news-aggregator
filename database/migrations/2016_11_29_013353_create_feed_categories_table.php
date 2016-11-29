@@ -17,8 +17,6 @@ class CreateFeedCategoriesTable extends Migration
             $table->increments('id');
             $table->integer('feed_id')->unsigned();
             $table->integer('category_id')->unsigned();
-            $table->foreign('feed_id')->references('id')->on('feed');
-            $table->foreign('category_id')->references('id')->on('category');
             $table->timestamps();
         });
     }
