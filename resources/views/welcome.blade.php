@@ -10,11 +10,13 @@
             </thead>
             <tbody>
                 @foreach($feeds as $feed)
-                    <td>
-                        <a href="{{$feed->getLink()}}">
-                            {{ $feed->getTitle() }}
-                        </a>
-                    </td>
+                    <tr>
+                        <td>
+                            <a href="{{$feed->getLink()}}">
+                                {{ $feed->getTitle() }}
+                            </a>
+                        </td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>

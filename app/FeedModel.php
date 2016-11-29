@@ -14,12 +14,9 @@ class FeedModel extends Model
 
         $link_start = '';
 
-        if (!strpos($url, "http://")) {
-            $link_start = 'http://';
-        }
 
-        if (!strpos($url, 'https://')) {
-            $link_start = 'https://';
+        if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
+            $link_start = "https://";
         }
 
         $read_page=file_get_contents($link_start.$url);
@@ -45,12 +42,8 @@ class FeedModel extends Model
 
         $link_start = '';
 
-        if (!strpos($url, "http://")) {
-            $link_start = 'http://';
-        }
-
-        if (!strpos($url, 'https://')) {
-            $link_start = 'https://';
+        if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
+            $link_start = "https://";
         }
         return $link_start.$url;
     }
