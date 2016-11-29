@@ -2,13 +2,24 @@
 
 @section('content')
     @if ($feeds)
-        <table class="table table-hover table-bordered table-striped table-default table-condensed table-responsive">
-            <thead>
+        <div class="col-md-4">
+            @if ($categories)
+                <ul class="list-group">
+                    @foreach($categories as $key => $name)
+                        <li id="{{$key}}" class="list-group-item category-list">
+                            {{$name}}
+                    @endforeach
+                </ul>
+            @endif
+        </div>
+        <div class="col-md-8">
+            <table class="table table-hover table-bordered table-striped table-default table-condensed table-responsive">
+                <thead>
                 <tr>
                     <th>Title</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 @foreach($feeds as $feed)
                     <tr>
                         <td>
@@ -18,8 +29,10 @@
                         </td>
                     </tr>
                 @endforeach
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+
         @else
             <div class="alert alert-info">
                 There are currently no feeds.

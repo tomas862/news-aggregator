@@ -47,5 +47,6 @@ Route::get('/removeCategory/{id}', 'Admin\CategoryController@removeCategoryActio
 Route::get('/removeFeed/{id}', 'Admin\FeedController@removeFeedAction')->middleware('auth');
 
 Route::post('/', 'Auth\ChangePasswordController@changePasswordAction');
+Route::post('/', 'FrontController@ajaxProcessFilter');
 Route::post('/feeds', 'Admin\FeedController@addFeedAction');
 Route::post('/categories', 'Admin\CategoryController@addFeedCategoryAction');
