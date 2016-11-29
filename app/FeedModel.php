@@ -38,4 +38,20 @@ class FeedModel extends Model
             return $link_start.$url;
         }
     }
+
+    public function getLink()
+    {
+        $url = $this->link;
+
+        $link_start = '';
+
+        if (!strpos($url, "http://")) {
+            $link_start = 'http://';
+        }
+
+        if (!strpos($url, 'https://')) {
+            $link_start = 'https://';
+        }
+        return $link_start.$url;
+    }
 }
