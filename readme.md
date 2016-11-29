@@ -18,4 +18,4 @@
 
 * I was unable to finish everything mentioned in task due to very short night time
 * Please if the program or code would not fit most of the requirments, contact me anyway
-  for displaying all those mistakes. All responses will very useful for me. Thank you!
+  for displaying all those mistakes. All responses will be very useful for me. Thank you!
