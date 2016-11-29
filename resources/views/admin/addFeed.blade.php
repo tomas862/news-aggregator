@@ -12,6 +12,12 @@
             </div>
         @endif
 
+            @if (Session::has('success_message'))
+                <div class="alert alert-success">
+                    {{ Session::get('success_message') }}
+                </div>
+            @endif
+
         <div class="panel panel-default">
             <div class="panel-heading">
                 Add feed

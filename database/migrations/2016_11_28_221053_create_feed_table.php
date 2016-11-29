@@ -13,7 +13,7 @@ class CreateFeedTable extends Migration
      */
     public function up()
     {
-        Schema::create('feeds', function (Blueprint $table) {
+        Schema::create('feed', function (Blueprint $table) {
             $table->increments('id');
             $table->string('link')->unique();
             $table->boolean('active');
@@ -28,6 +28,6 @@ class CreateFeedTable extends Migration
      */
     public function down()
     {
-        Schema::drop('feeds');
+        Schema::drop('feed');
     }
 }

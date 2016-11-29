@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
+use App\CategoryModel;
 use Config;
 use Session;
 use Route;

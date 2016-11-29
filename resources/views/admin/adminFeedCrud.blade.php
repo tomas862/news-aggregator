@@ -27,13 +27,35 @@
                         <thead>
                         <tr>Feeds</tr>
                         <tr>
-                            <td>Id</td>
-                            <td>Link</td>
-                            <td>Category</td>
+                            <th class="col-md-2">Id</th>
+                            <th class="col-md-6">Link</th>
+                            <th class="col-md-6">Status</th>
+                            <th class="col-md-2"></th>
                         </tr>
                         </thead>
                         <tbody>
-
+                                @foreach($feeds as $feed)
+                                    <tr>
+                                       <td class="col-md-2">{{ $feed->id }}</td>
+                                       <td class="col-md-6">{{ $feed->link }}</td>
+                                       <td class="col-md-2">
+                                           @if ($feed->active)
+                                               <p class="bg-success text-center">
+                                                   Commited
+                                               </p>
+                                               @else
+                                               <p class="bg-info text-center">
+                                                   Not commited
+                                               </p>
+                                           @endif
+                                       </td>
+                                       <td class="col-md-2">
+                                           <a class="btn btn-danger">
+                                               <i class="glyphicon glyphicon-remove"></i>&nbsp;Remove
+                                           </a>
+                                       </td>
+                                    </tr>
+                                @endforeach
                         </tbody>
                     </table>
                     @else
