@@ -1,6 +1,17 @@
 @extends('layouts.app')
 @section('content')
     <div class="col-lg-6 col-lg-offset-3">
+
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="panel panel-default">
             <div class="panel-heading">
                 Add feed
@@ -12,6 +23,12 @@
                         {{ Form::label('feed_url', 'Enter feed url') }}
                         {{ Form::text('feed_url', null, ['class' => 'form-control']) }}
                     </div>
+                    @if ($categories)
+                        <div class="form-group">
+                            {{ Form::label('categories', 'Categories') }}
+                            {{ Form::select('categories[]', $categories, null, ['id' => 'categories', 'multiple' => true, 'class' => 'form-control']) }}
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="panel-footer">

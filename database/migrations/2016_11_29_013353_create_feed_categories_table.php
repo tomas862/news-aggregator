@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoryTable extends Migration
+class CreateFeedCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('feed_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
+            $table->integer('feed_id')->unsigned();
+            $table->integer('category_id')->unsigned();
+            $table->foreign('feed_id')->references('id')->on('feeds');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ class CreateCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::drop('categories');
+        Schema::drop('feed_categories');
     }
 }

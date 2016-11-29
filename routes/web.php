@@ -23,7 +23,15 @@ Route::get('/feeds', 'Admin\FeedController@index')->middleware('auth');
 Route::get('/change-password', 'Auth\ChangePasswordController@index')->middleware('auth');
 
 Route::get('/addFeed/{id?}', function() {
-    return view('admin/addFeed');
+
+    $categories = App\CategoryModel::pluck('name', 'id')->all();
+
+    return view(
+        'admin/addFeed',
+        [
+            'categories' => $categories
+        ]
+    );
 })->middleware('auth');
 
 Route::get('/addCategory/{id?}', function($id_category = 0) {
@@ -40,5 +48,5 @@ Route::get('/addCategory/{id?}', function($id_category = 0) {
 Route::get('/removeCategory/{id}', 'Admin\CategoryController@removeCategoryAction')->middleware('auth');
 
 Route::post('/', 'Auth\ChangePasswordController@changePasswordAction');
-Route::post('/feeds', 'Admin\FeedController@feedActionAdd');
+Route::post('/feeds', 'Admin\FeedController@addFeedAction');
 Route::post('/categories', 'Admin\CategoryController@addFeedCategoryAction');

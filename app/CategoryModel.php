@@ -11,5 +11,5 @@ class CategoryModel extends Model
      *
      * @var string
      */
-    protected $table = 'category';
+    protected $table = 'categories';
 }

@@ -19,19 +19,28 @@
                 <div class="clearfix">
                     &nbsp;
                 </div>
-                <table class="table table-hover">
-                    <thead>
-                    <tr>Feeds</tr>
-                    <tr>
-                        <td>Id</td>
-                        <td>Link</td>
-                        <td>Category</td>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <div class="clearfix">
+                    &nbsp;
+                </div>
+                @if ($is_feed)
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>Feeds</tr>
+                        <tr>
+                            <td>Id</td>
+                            <td>Link</td>
+                            <td>Category</td>
+                        </tr>
+                        </thead>
+                        <tbody>
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                    @else
+                        <div class="alert alert-info">
+                            There are currently no feeds.
+                        </div>
+                @endif
             </div>
         </div>
     </div>
