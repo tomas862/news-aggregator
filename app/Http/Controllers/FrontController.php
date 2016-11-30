@@ -9,16 +9,16 @@ class FrontController extends Controller
 {
     public function index()
     {
-        $feedsModel = new FeedModel();
         $feeds =
-        $feedsModel::orderBy('updated_at', 'desc')->where('active', 1)->paginate(Config::get('constants.PAGE_COUNT'));
-        $categories = CategoryModel::pluck('name', 'id');
+            FeedModel::orderBy('updated_at', 'desc')->where('active', 1)->paginate(Config::get('constants.PAGE_COUNT'));
+        $categories = CategoryModel::join('feed_category', '.category.id', '=', 'feed_category.category_model_id')
+                        ->pluck('category.name', 'category.id');
         return view(
             'welcome',
             [
                 'feeds' => $feeds,
                 'categories' => $categories,
-                'is_feeds' => $feedsModel->exists()
+                'feeds_count' => $feeds->count()
             ]
         );
     }

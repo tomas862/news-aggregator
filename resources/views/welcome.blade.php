@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @if ($is_feeds)
+    @if ($feeds_count)
         <div class="col-md-4">
             @if ($categories)
                 <ul class="list-group">

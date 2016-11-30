@@ -16,9 +16,10 @@ class CreateFeedCategoriesTable extends Migration
         Schema::create('feed_category', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('feed_model_id')->unsigned();
-            $table->integer('category_id');
+            $table->integer('category_model_id')->unsigned();
             $table->timestamps();
             $table->foreign('feed_model_id')->references('id')->on('feed')->onDelete('cascade');
+            $table->foreign('category_model_id')->references('id')->on('category')->onDelete('cascade');
         });
     }
 

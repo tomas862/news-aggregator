@@ -57,7 +57,7 @@ class FeedController extends Controller
             foreach ($request->categories as $category) {
                 $categoryModel = new FeedCategoryModel();
                 $categoryModel->feed_model_id = $feedModel->id;
-                $categoryModel->category_id = $category;
+                $categoryModel->category_model_id = $category;
                 $categoryModel->save();
             }
         }
