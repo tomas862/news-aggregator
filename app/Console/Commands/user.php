@@ -53,13 +53,13 @@ class user extends Command
             die('Please provide email address');
         }
 
-        $password = $this->ask('Enter password');
+        $password = $this->secret('Enter password');
 
         if (!$password) {
             die('Please provide password');
         }
 
-        $password_confirm = $this->ask('Confirm your password');
+        $password_confirm = $this->secret('Confirm your password');
 
         if ($password_confirm !== $password) {
             die('Passwords did not match');

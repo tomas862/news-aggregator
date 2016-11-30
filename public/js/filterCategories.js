@@ -2,7 +2,8 @@
  * Created by tomas on 16.11.29.
  */
 $(document).ready(function(){
-    $('.category-list').on('click', function(){
+    $('.category-list').on('toggle', function(){
+        alert('sadsad');
         var button = $(this);
         $.ajax({
             'url': '/',

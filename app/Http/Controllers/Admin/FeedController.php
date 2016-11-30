@@ -37,9 +37,14 @@ class FeedController extends Controller
             ],
             [
                 'feed_url' =>
-                    'required|unique:feed,link,:link|max:255'
+                'required|regex:/^(https?:)?\/\/[$~:;#,%&_=\(\)\[\]\.\? \+\-@\/a-zA-Z0-9]+$/|
+                 unique:feed,link,:link|max:255'
             ]
         );
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator);
+        }
 
         DB::beginTransaction();
 

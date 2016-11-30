@@ -8,7 +8,7 @@ class FrontController extends Controller
 {
     public function index()
     {
-        $feeds = FeedModel::orderBy('updated_at', 'desc')->get();
+        $feeds = FeedModel::orderBy('updated_at', 'desc')->where('active', 1)->get();
         $categories = CategoryModel::pluck('name', 'id');
         return view(
             'welcome',
