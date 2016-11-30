@@ -22,7 +22,7 @@ Route::get('/change-password', 'Auth\ChangePasswordController@index')->middlewar
 
 Route::get('/addFeed/{id?}', function() {
 
-    $categories = App\CategoryModel::pluck('name', 'id')->all();
+    $categories = App\Models\CategoryModel::pluck('name', 'id')->all();
 
     return view(
         'admin/addFeed',
@@ -33,7 +33,7 @@ Route::get('/addFeed/{id?}', function() {
 })->middleware('auth');
 
 Route::get('/addCategory/{id?}', function($id_category = 0) {
-    $categoryModel = App\CategoryModel::find($id_category);
+    $categoryModel = App\Models\CategoryModel::find($id_category);
     return view(
         'admin/addFeedCategory',
         [

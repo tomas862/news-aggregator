@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Hash;
-use App\User;
+use App\Models\User;
 
 class ChangePasswordController extends Controller
 {

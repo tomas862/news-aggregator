@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @if ($feeds)
+    @if ($is_feeds)
         <div class="col-md-4">
             @if ($categories)
                 <ul class="list-group">
@@ -17,14 +17,20 @@
                 <thead>
                 <tr>
                     <th>Title</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($feeds as $feed)
                     <tr>
                         <td>
-                            <a href="{{$feed->getLink()}}">
+                            <a >
                                 {{ $feed->getTitle() }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{$feed->getLink()}}" class="btn btn-default" target="_blank">
+                                Visit page <i class="glyphicon glyphicon-arrow-right"></i>
                             </a>
                         </td>
                     </tr>
@@ -32,7 +38,7 @@
                 </tbody>
             </table>
         </div>
-
+        {{ $feeds->links() }}
         @else
             <div class="alert alert-info">
                 There are currently no feeds.

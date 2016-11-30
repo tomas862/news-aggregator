@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
-use App\CategoryModel;
+use App\Models\CategoryModel;
 use Config;
 use Session;
 use Route;
@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categoryModel = new CategoryModel();
-        $categories = $categoryModel::paginate(Config::get('constants.ADMIN_PAGE_COUNT'));
+        $categories = $categoryModel::paginate(Config::get('constants.PAGE_COUNT'));
 
         return view('admin/adminCategoryCrud', [
             'categories' => $categories,

@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\FeedModel;
+use App\Models\FeedModel;
 
 class feed extends Command
 {

@@ -7,8 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-use App\FeedModel;
-use App\FeedCategoryModel;
+use App\Models\FeedModel;
+use App\Models\FeedCategoryModel;
 use Session;
 use Config;
 use Route;
@@ -18,7 +18,7 @@ class FeedController extends Controller
     public function index()
     {
         $feedModel = new FeedModel();
-        $feeds = $feedModel::paginate(Config::get('constants.ADMIN_PAGE_COUNT'));
+        $feeds = $feedModel::paginate(Config::get('constants.PAGE_COUNT'));
 
         return view(
             'admin/adminFeedCrud',
@@ -56,7 +56,7 @@ class FeedController extends Controller
         if (!empty($request->categories)) {
             foreach ($request->categories as $category) {
                 $categoryModel = new FeedCategoryModel();
-                $categoryModel->feed_id = $feedModel->id;
+                $categoryModel->feed_model_id = $feedModel->id;
                 $categoryModel->category_id = $category;
                 $categoryModel->save();
             }
@@ -86,7 +86,7 @@ class FeedController extends Controller
             return Redirect::back()->withErrors(['Unable to find feed']);
         }
 
-        FeedCategoryModel::where('feed_id', $id_feed)->delete();
+//        FeedCategoryModel::where('feed_model_id', $id_feed)->delete();
 
         if (!$feedModel->delete()) {
             return Redirect::back()->withErrors(['Failed to delete feed']);
