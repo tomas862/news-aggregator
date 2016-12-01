@@ -6,8 +6,9 @@
             @if ($categories)
                 <ul class="list-group">
                     @foreach($categories as $key => $name)
-                        <li id="{{$key}}" class="list-group-item category-list">
-                            {{$name}}
+                        <button id="{{ $key }}" class="list-group-item category-list">
+                            {{ $name }}
+                        </button>
                     @endforeach
                 </ul>
             @endif
@@ -38,7 +39,9 @@
                 </tbody>
             </table>
         </div>
-        {{ $feeds->links() }}
+        <div class="text-center">
+            {{ $feeds->links() }}
+        </div>
         @else
             <div class="alert alert-info">
                 There are currently no feeds.

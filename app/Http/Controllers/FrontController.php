@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\FeedModel;
 use App\Models\CategoryModel;
+use App\Models\FeedCategoryModel;
 use Config;
 
 class FrontController extends Controller
@@ -23,8 +24,22 @@ class FrontController extends Controller
         );
     }
 
-    public function ajaxProcessFilter()
+    public function ajaxProcessFilter(\Illuminate\Http\Request $request)
     {
-        die('response');
+        $filters = json_decode($request->filters);
+
+        if (empty($filters)) {
+            die('0');
+        }
+
+        $feed_ids = FeedCategoryModel::whereIn('category_model_id', $filters)
+            ->groupBy('feed_model_id')
+            ->pluck('feed_model_id');
+
+        if (empty($feed_ids)) {
+            die('0');
+        }
+
+        die($feed_ids);
     }
 }
