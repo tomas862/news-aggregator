@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Config;
 
 class FeedModel extends Model
 {
@@ -39,5 +40,19 @@ class FeedModel extends Model
             $link_start = "https://";
         }
         return $link_start.$url;
+    }
+
+    public static function getFeeds($feed_ids = array())
+    {
+        $query = self::query();
+        $query = $query->orderBy('updated_at', 'desc');
+        $query = $query->where('active', 1);
+
+        if (!empty($feed_ids)) {
+            $query = $query->whereIn('id', $feed_ids);
+        }
+
+        $query = $query->paginate(Config::get('constants.PAGE_COUNT'));
+        return $query;
     }
 }

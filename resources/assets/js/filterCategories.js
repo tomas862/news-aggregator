@@ -20,8 +20,12 @@ function processFilter(button, elements)
         },
         'dataType': 'html',
         'success': function(response) {
-            button.removeClass('category-list').addClass('category-filtered').off('category-list');
-            button.append('<span class="badge"><i class="glyphicon glyphicon-remove"></i></span>');
+            if (response) {
+                button.removeClass('category-list').addClass('category-filtered').off('category-list');
+                button.append('<span class="badge"><i class="glyphicon glyphicon-remove"></i></span>');
+                var container = $('.feeds-container');
+                container.find('.feed-content').replaceWith(response);
+            }
         }
     });
 }
