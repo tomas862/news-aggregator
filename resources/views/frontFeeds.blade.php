@@ -2,7 +2,7 @@
     <table class="table table-hover table-bordered table-striped table-default table-condensed table-responsive">
         <thead>
         <tr>
-            <th>Title</th>
+            <th>News aggregator</th>
             <th></th>
         </tr>
         </thead>
@@ -16,7 +16,7 @@
                 </td>
                 <td>
                     <a href="{{$feed->getLink()}}" class="btn btn-default" target="_blank">
-                        Visit page <i class="glyphicon glyphicon-arrow-right"></i>
+                        Visit page
                     </a>
                 </td>
             </tr>

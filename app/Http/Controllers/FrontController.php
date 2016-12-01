@@ -22,23 +22,16 @@ class FrontController extends Controller
         );
     }
 
-    public function ajaxProcessFilter(\Illuminate\Http\Request $request)
+    public function ajaxProcess(\Illuminate\Http\Request $request)
     {
-        $filters = json_decode($request->filters);
-
-        if (empty($filters)) {
-            die('0');
-        }
+        $filters = array_map('intval', (array)json_decode($request->filters));
 
         $feed_ids = FeedCategoryModel::whereIn('category_model_id', $filters)
             ->groupBy('feed_model_id')
             ->pluck('feed_model_id')->toArray();
 
-        if (empty($feed_ids)) {
-            die('0');
-        }
-
         $feeds = FeedModel::getFeeds($feed_ids);
+
         die(
             view('frontFeeds',
                 [
