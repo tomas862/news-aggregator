@@ -6,7 +6,7 @@
             @if ($categories)
                 <ul class="list-group">
                     @foreach($categories as $key => $name)
-                        <button id="{{ $key }}" class="list-group-item category-list">
+                        <button id="{{ $key }}" class="list-group-item category-list" data-loading-text="Loading...">
                             {{ $name }}
                         </button>
                     @endforeach
@@ -14,8 +14,9 @@
             @endif
         </div>
             <div class="feeds-container">
-                @include('frontFeeds')
+                @include('includes.frontFeeds')
             </div>
+        @include('includes.modal')
         @else
             <div class="alert alert-info">
                 There are currently no feeds.

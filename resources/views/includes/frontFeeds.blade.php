@@ -10,7 +10,7 @@
         @foreach($feeds as $feed)
             <tr>
                 <td>
-                    <p>
+                    <p class="feed-title">
                         {{ $feed->getTitle() }}
                     </p>
                 </td>

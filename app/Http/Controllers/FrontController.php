@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 use App\Models\FeedModel;
 use App\Models\CategoryModel;
-use App\Models\FeedCategoryModel;
 
 class FrontController extends Controller
 {
     public function index()
     {
         $feeds = FeedModel::getFeeds();
-        $categories = CategoryModel::join('feed_category', '.category.id', '=', 'feed_category.category_model_id')
-                        ->pluck('category.name', 'category.id');
+        $categories = CategoryModel::getFeedCategories();
         return view(
             'welcome',
             [
@@ -24,13 +22,15 @@ class FrontController extends Controller
 
     public function ajaxProcess(\Illuminate\Http\Request $request)
     {
-        $filters = array_map('intval', (array)json_decode($request->filters));
+        $filter_categories = array_map('intval', (array)json_decode($request->filters));
 
-        $feed_ids = FeedCategoryModel::whereIn('category_model_id', $filters)
-            ->groupBy('feed_model_id')
-            ->pluck('feed_model_id')->toArray();
-
-        $feeds = FeedModel::getFeeds($feed_ids);
+        $feed_ids = FeedModel::getFeedIds($filter_categories);
+        $feeds = [];
+        if (!empty($feed_ids)) {
+            $feeds = FeedModel::getAjaxFeeds($feed_ids);
+        } elseif (empty($feed_ids)) {
+            $feeds = FeedModel::getFeeds();
+        }
 
         die(
             view('frontFeeds',

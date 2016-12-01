@@ -14,14 +14,14 @@ require('laravel-elixir-vue-2');
  */
 
 elixir(mix => {
-    var bootstrapPath = 'node_modules/bootstrap-sass/assets';
     mix.sass('app.scss')
         .webpack(
             [
                 'app.js',
-                'jquery-3.1.1.min.js',
                 'bootstrap.min.js',
-                'filterCategories.js'
+                'jquery-3.1.1.min.js',
+                'filterCategories.js',
+                'modal.js'
             ],
             'public/js/main.js'
         );

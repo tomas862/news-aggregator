@@ -12,4 +12,10 @@ class CategoryModel extends Model
      * @var string
      */
     protected $table = 'category';
+
+    public static function getFeedCategories()
+    {
+        return self::join('feed_category', '.category.id', '=', 'feed_category.category_model_id')
+            ->pluck('category.name', 'category.id');
+    }
 }

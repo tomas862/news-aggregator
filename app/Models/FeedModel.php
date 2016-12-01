@@ -42,17 +42,32 @@ class FeedModel extends Model
         return $link_start.$url;
     }
 
-    public static function getFeeds($feed_ids = array())
+    public static function getFeeds()
     {
-        $query = self::query();
-        $query = $query->orderBy('updated_at', 'desc');
-        $query = $query->where('active', 1);
+        return self::orderBy('updated_at', 'desc')
+            ->where('active', 1)
+            ->paginate(Config::get('constants.PAGE_COUNT'));
+    }
 
-        if (!empty($feed_ids)) {
-            $query = $query->whereIn('id', $feed_ids);
+    public static function getAjaxFeeds($feed_ids = [])
+    {
+        if (empty($feed_ids)) {
+            return [];
         }
+        return self::orderBy('updated_at', 'desc')
+            ->where('active', 1)
+            ->whereIn('id', $feed_ids)
+            ->paginate(Config::get('constants.PAGE_COUNT'));
 
-        $query = $query->paginate(Config::get('constants.PAGE_COUNT'));
-        return $query;
+    }
+
+    public static function getFeedIds($category_ids = [])
+    {
+        if (empty($category_ids)) {
+            return array();
+        }
+        return FeedCategoryModel::whereIn('category_model_id', $category_ids)
+            ->groupBy('feed_model_id')
+            ->pluck('feed_model_id')->toArray();
     }
 }

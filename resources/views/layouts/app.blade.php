@@ -54,28 +54,17 @@
                         @else
                             <li><a href="{{ url('/feeds') }}">My feeds</a></li>
                             <li><a href="{{ url('/categories') }}">My Categories</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                            <li><a href="{{ url('change-password') }}">Change password</a></li>
+                            <li>
+                                <a href="{{ url('/logout') }}"
+                                   onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                    Logout
                                 </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ url('change-password') }}">
-                                            Change password
-                                        </a>
-                                        <a href="{{ url('/logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
                             </li>
+                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
                         @endif
                     </ul>
                 </div>
@@ -84,6 +73,7 @@
         <div class="container">
             @yield('content')
             @yield('changePassword')
+            @yield('modal')
         </div>
     </div>
 

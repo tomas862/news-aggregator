@@ -1,22 +1,25 @@
 $(document).ready(function(){
     var elements = [];
     $(document).on('click', '.category-list', function(event){
+        $(this).button('loading');
         elements.push(parseInt($(this).attr('id')));
         event.preventDefault();
         processFilter($(this), elements);
+
     });
 
     $(document).on('click', '.category-filtered', function(event){
+        $(this).button('loading');
         var index = elements.indexOf(parseInt($(this).attr('id')));
         if (index > -1) {
             elements.splice(index, 1);
             event.preventDefault();
-            processDeleteFilter($(this), parseInt($(this).attr('id')));
+            processDeleteFilter($(this));
         }
     });
 });
 
-function processFilter(button, elements)
+function processFilter(btn, elements)
 {
     $.ajax({
         'url': '/',
@@ -30,20 +33,21 @@ function processFilter(button, elements)
         'dataType': 'html',
         'success': function(response) {
             if (response) {
-                button.removeClass('category-list')
+                btn.removeClass('category-list')
                         .addClass('category-filtered')
                         .addClass('list-group-item-info');
 
                 var container = $('.feeds-container');
                 container.find('.feed-content').replaceWith(response);
             }
+            btn.button('reset');
         }
     });
 }
 
-function processDeleteFilter(button, id_category)
+function processDeleteFilter(btn)
 {
-    button.removeClass('category-filtered')
+    btn.removeClass('category-filtered')
             .removeClass('list-group-item-info')
             .addClass('category-list');
 
@@ -68,6 +72,7 @@ function processDeleteFilter(button, id_category)
                 var container = $('.feeds-container');
                 container.find('.feed-content').replaceWith(response);
             }
+            btn.button('reset');
         }
     });
 }
