@@ -22,8 +22,18 @@ class FrontController extends Controller
 
     public function ajaxProcess(\Illuminate\Http\Request $request)
     {
-        $filter_categories = array_map('intval', (array)json_decode($request->filters));
+        if ($request->action == 'processFilter') {
+            $this->processFilter($request);
+        }
 
+        if ($request->action == 'processModal') {
+            $this->processOpenModal($request);
+        }
+    }
+
+    public function processFilter($request)
+    {
+        $filter_categories = array_map('intval', (array)json_decode($request->filters));
         $feed_ids = FeedModel::getFeedIds($filter_categories);
         $feeds = [];
         if (!empty($feed_ids)) {
@@ -32,12 +42,37 @@ class FrontController extends Controller
             $feeds = FeedModel::getFeeds();
         }
 
-        die(
-            view('frontFeeds',
-                [
-                    'feeds' => $feeds
-                ]
-            )->render()
+        die(view('includes.frontFeeds',
+            [
+                'feeds' => $feeds
+            ]
+        )->render()
         );
+    }
+
+    public function processOpenModal($request)
+    {
+        $id_feed = (int)$request->id_feed;
+        if (!$id_feed) {
+            die('0');
+        }
+
+        $feed = FeedModel::find($id_feed);
+        $link = $feed->getLink();
+
+        if (!$link) {
+            die('0');
+        }
+
+        $link_content = file_get_contents($link);
+        if (preg_match('/<p>(.*)<\/p>/', $link_content, $body)) {
+            die(json_encode(
+                [
+                    'link' => $link,
+                    'body' => $body[1]
+                ]
+            )
+        );
+        }
     }
 }

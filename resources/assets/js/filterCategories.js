@@ -27,6 +27,7 @@ function processFilter(btn, elements)
         'async': true,
         'headers': {"X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')},
         'data': {
+            action: 'processFilter',
             filters: JSON.stringify(elements),
             ajax: 1
         },
@@ -63,6 +64,7 @@ function processDeleteFilter(btn)
         'async': true,
         'headers': {"X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')},
         'data': {
+            action: 'processFilter',
             filters: JSON.stringify(filter_elements),
             ajax: 1
         },

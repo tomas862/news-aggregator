@@ -10,9 +10,9 @@
         @foreach($feeds as $feed)
             <tr>
                 <td>
-                    <p class="feed-title">
+                    <a id="{{ $feed->id }}" class="feed-title">
                         {{ $feed->getTitle() }}
-                    </p>
+                    </a>
                 </td>
                 <td>
                     <a href="{{$feed->getLink()}}" class="btn btn-default" target="_blank">

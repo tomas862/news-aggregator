@@ -73,7 +73,6 @@
         <div class="container">
             @yield('content')
             @yield('changePassword')
-            @yield('modal')
         </div>
     </div>
 
