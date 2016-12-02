@@ -12,10 +12,3 @@
 * run "php artisan serve" to launch website
 * there might be a problem with ciphers. Google helps to solve this problem fast.
 * to create admin user run "php artisan user:create"
-
-
-## Other information
-
-* I was unable to finish everything mentioned in task due to very short night time
-* Please if the program or code would not fit most of the requirments, contact me anyway
-  for displaying all those mistakes. All responses will be very useful for me. Thank you!
