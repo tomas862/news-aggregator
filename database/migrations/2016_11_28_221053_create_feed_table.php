@@ -15,7 +15,7 @@ class CreateFeedTable extends Migration
     {
         Schema::create('feed', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('link')->unique();
+            $table->string('link');
             $table->boolean('active');
             $table->timestamps();
         });

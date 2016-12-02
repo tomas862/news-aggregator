@@ -23,6 +23,18 @@ class CategoryController extends Controller
         ]);
     }
 
+    public function addCategoryView($id_category = 0)
+    {
+        $categoryModel = CategoryModel::find($id_category);
+        return view(
+            'admin/addFeedCategory',
+            [
+                'id_category' => $id_category,
+                'category_name' => ($categoryModel)? $categoryModel->name: null
+            ]
+        );
+    }
+
     public function addFeedCategoryAction(\Illuminate\Http\Request $request)
     {
         $this->validate($request, [

@@ -27,14 +27,27 @@
                 <div class="col-lg-12">
                     <div class="form-group">
                         {{ Form::label('feed_url', 'Enter feed url') }}
-                        {{ Form::text('feed_url', null, ['class' => 'form-control']) }}
+                        {{ Form::text('feed_url', ($feed_link) ? $feed_link : null, ['class' => 'form-control']) }}
                     </div>
-                    @if ($categories)
                         <div class="form-group">
-                            {{ Form::label('categories', 'Categories') }}
-                            {{ Form::select('categories[]', $categories, null, ['id' => 'categories', 'multiple' => true, 'class' => 'form-control']) }}
+                            @if ($categories)
+                                <div class="col-lg-6">
+                                    {{ Form::label('categories', 'Categories') }}
+                                    {{ Form::select('categories[]', $categories, null, ['id' => 'categories', 'multiple' => true, 'class' => 'form-control']) }}
+                                </div>
+                            @endif
+                            @if ($selected_categories)
+                                <div class="col-lg-6">
+                                    {{ Form::label('current_categories', 'Current categories') }}
+                                    {{ Form::select('current_categories[]', $selected_categories, null, ['id' => 'current_categories', 'multiple' => true, 'class' => 'form-control', 'disabled' => true]) }}
+                                </div>
+                            @endif
                         </div>
+
+                    @if ($id_feed)
+                        {{Form::text('id_feed', $id_feed, ['class' => 'hidden'])}}
                     @endif
+
                 </div>
             </div>
             <div class="panel-footer">

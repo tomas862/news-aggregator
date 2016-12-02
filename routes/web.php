@@ -20,28 +20,8 @@ Route::get('/categories', 'Admin\CategoryController@index')->middleware('auth');
 Route::get('/feeds', 'Admin\FeedController@index')->middleware('auth');
 Route::get('/change-password', 'Auth\ChangePasswordController@index')->middleware('auth');
 
-Route::get('/addFeed/{id?}', function() {
-
-    $categories = App\Models\CategoryModel::pluck('name', 'id')->all();
-
-    return view(
-        'admin/addFeed',
-        [
-            'categories' => $categories
-        ]
-    );
-})->middleware('auth');
-
-Route::get('/addCategory/{id?}', function($id_category = 0) {
-    $categoryModel = App\Models\CategoryModel::find($id_category);
-    return view(
-        'admin/addFeedCategory',
-        [
-            'id_category' => $id_category,
-            'category_name' => ($categoryModel)? $categoryModel->name: null
-        ]
-    );
-})->middleware('auth');
+Route::get('/addFeed/{id?}', 'Admin\FeedController@addFeedView')->middleware('auth');
+Route::get('/addCategory/{id?}', 'Admin\CategoryController@addCategoryView')->middleware('auth');
 
 Route::get('/removeCategory/{id}', 'Admin\CategoryController@removeCategoryAction')->middleware('auth');
 Route::get('/removeFeed/{id}', 'Admin\FeedController@removeFeedAction')->middleware('auth');

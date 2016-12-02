@@ -27,18 +27,18 @@
                         <thead>
                         <tr>Feeds</tr>
                         <tr>
-                            <th class="col-md-2">Id</th>
-                            <th class="col-md-6">Link</th>
-                            <th class="col-md-6">Status</th>
+                            <th class="col-md-1     ">Id</th>
+                            <th class="col-md-7">Link</th>
+                            <th class="col-md-2">Status</th>
                             <th class="col-md-2"></th>
                         </tr>
                         </thead>
                         <tbody>
                                 @foreach($feeds as $feed)
                                     <tr>
-                                       <td class="col-md-2">{{ $feed->id }}</td>
+                                       <td class="col-md-1">{{ $feed->id }}</td>
                                        <td class="col-md-6">{{ $feed->link }}</td>
-                                       <td class="col-md-2">
+                                       <td class="col-md-1">
                                            @if ($feed->active)
                                                <p class="bg-success text-center">
                                                    Commited
@@ -49,7 +49,10 @@
                                                </p>
                                            @endif
                                        </td>
-                                       <td class="col-md-2">
+                                       <td class="col-md-4">
+                                           <a class="btn btn-default" href="{{ url('/addFeed/'.$feed->id) }}">
+                                               <i class="glyphicon glyphicon-edit"></i>&nbsp;Edit
+                                           </a>
                                            <a class="btn btn-danger" href="{{ url('/removeFeed/'.$feed->id) }}">
                                                <i class="glyphicon glyphicon-remove"></i>&nbsp;Remove
                                            </a>
