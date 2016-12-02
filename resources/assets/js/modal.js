@@ -18,7 +18,6 @@ function ajaxOpenModal(feed)
         },
         'dataType': 'html',
         'success': function(response) {
-            console.log(response);
             var object = JSON.parse(response);
             if (object.body) {
                 $('.heading-container').replaceWith(
@@ -30,8 +29,12 @@ function ajaxOpenModal(feed)
                 );
 
                 $('.modal-href-item').attr('href', object.link);
-                $('#feed-modal').modal('show');
+            } else {
+                $('.modal-body').replaceWith(
+                    '<div class="modal-body"><div class="alert alert-info">Failed to receive texts. Click go to page</div></div>'
+                );
             }
+            $('#feed-modal').modal('show');
         }
     });
 }

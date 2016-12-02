@@ -59,6 +59,6 @@ class ChangePasswordController extends Controller
             return Redirect::back()->withErrors(['Failed to save data to database']);
         }
 
-        return redirect()->route('login');
+        return redirect()->route('feeds');
     }
 }

@@ -70,13 +70,18 @@ class FrontController extends Controller
         }
 
         $feed = FeedModel::find($id_feed);
-        $link = $feed->getLink();
+        $link = $feed->link;
 
         if (!$link) {
             die('0');
         }
 
         $link_content = file_get_contents($link);
+
+        if (!$link_content) {
+            die('0');
+        }
+
         if (preg_match('/<p>(.*)<\/p>/', $link_content, $body)) {
             die(json_encode(
                 [

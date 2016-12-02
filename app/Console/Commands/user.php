@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-use Dotenv\Validator;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
 
 class user extends Command
 {
@@ -49,8 +49,19 @@ class user extends Command
 
         $email = $this->ask('Enter your email address');
 
-        if (!$email) {
-            die('Please provide email address');
+        $validator = Validator::make(
+            [
+                'email' => $email
+            ],
+            [
+                'email' =>
+                    'required|email'
+            ]
+        );
+
+        if ($validator->fails()) {
+            $this->warn($validator->currentRule);
+            die();
         }
 
         $password = $this->secret('Enter password');

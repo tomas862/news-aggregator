@@ -15,7 +15,6 @@ Route::get('/', 'FrontController@index');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->middleware('auth');
 Route::get('/categories', 'Admin\CategoryController@index')->middleware('auth');
 Route::get('/feeds', 'Admin\FeedController@index')->middleware('auth');
 Route::get('/change-password', 'Auth\ChangePasswordController@index')->middleware('auth');

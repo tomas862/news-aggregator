@@ -16,19 +16,22 @@ class FeedModel extends Model
     {
         $url = $this->link;
 
-        $read_page=file_get_contents($url);
+        $read_page = file_get_contents($url);
+
+        if (!$read_page) {
+            return false;
+        }
+
         preg_match("/<title.*?>[\n\r\s]*(.*)[\n\r\s]*<\/title>/", $read_page, $page_title);
-        if (isset($page_title[1]))
-        {
+
+        if (isset($page_title[1])) {
             if ($page_title[1] == '')
             {
                 return $url;
             }
             $page_title = $page_title[1];
             return trim($page_title);
-        }
-        else
-        {
+        } else {
             return $url;
         }
     }

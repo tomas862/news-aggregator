@@ -15,7 +15,7 @@
                     </a>
                 </td>
                 <td>
-                    <a href="{{$feed->getLink()}}" class="btn btn-default" target="_blank">
+                    <a href="{{$feed->link}}" class="btn btn-default" target="_blank">
                         Visit page
                     </a>
                 </td>
