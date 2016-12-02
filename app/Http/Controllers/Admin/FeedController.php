@@ -15,9 +15,13 @@ use Route;
 
 class FeedController extends Controller
 {
+    /** renders view of admin feeds CRUD
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $feedModel = new FeedModel();
+        $inactive_feeds = $feedModel::where('active', 0)->count();
         $feeds = $feedModel::paginate(Config::get('constants.PAGE_COUNT'));
 
         return view(
@@ -25,10 +29,15 @@ class FeedController extends Controller
             [
                 'feeds' => $feeds,
                 'is_feed' => $feedModel->exists(),
+                'inactive_feeds_count' => $inactive_feeds
             ]
         );
     }
 
+    /** renders view of admin add feed form
+     * @param int $id_feed
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function addFeedView($id_feed = 0)
     {
         $link = '';
@@ -52,6 +61,10 @@ class FeedController extends Controller
         );
     }
 
+    /** validates feed url
+     * @param \Illuminate\Http\Request $request
+     * @return Redirect
+     */
     public function addFeedAction(\Illuminate\Http\Request $request)
     {
         $validator = Validator::make(
@@ -83,6 +96,9 @@ class FeedController extends Controller
         return Redirect('/feeds');
     }
 
+    /** adds new feed to feed table
+     * @param $request
+     */
     public function addFeed($request)
     {
         DB::beginTransaction();
@@ -103,6 +119,10 @@ class FeedController extends Controller
         DB::commit();
     }
 
+    /** updates existing feeds
+     * @param $id_feed
+     * @param $request
+     */
     public function updateFeed($id_feed, $request)
     {
         $feedModel = FeedModel::find($id_feed);
@@ -121,7 +141,9 @@ class FeedController extends Controller
         }
     }
 
-
+    /** removes categories from feeds table and from feed_category table
+     * @return Redirect
+     */
     public function removeFeedAction()
     {
         $id_feed = (int)Route::current()->getParameter('id');
@@ -135,8 +157,6 @@ class FeedController extends Controller
         if (!$feedModel) {
             return Redirect::back()->withErrors(['Unable to find feed']);
         }
-
-//        FeedCategoryModel::where('feed_model_id', $id_feed)->delete();
 
         if (!$feedModel->delete()) {
             return Redirect::back()->withErrors(['Failed to delete feed']);

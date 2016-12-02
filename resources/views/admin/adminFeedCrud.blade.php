@@ -11,6 +11,12 @@
                     </div>
                 @endif
 
+                @if ($inactive_feeds_count > 0)
+                    <div class="alert alert-info">
+                        There are some inactive feeds. Please use php artisan feed:update command to update them.
+                    </div>
+                @endif
+
                 <div class="pull-right">
                     <a class="btn btn-default" href="{{ url('/addFeed') }}">
                         <i class="glyphicon glyphicon-plus"></i>&nbsp;Add feed

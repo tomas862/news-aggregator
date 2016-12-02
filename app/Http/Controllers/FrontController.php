@@ -6,6 +6,9 @@ use App\Models\CategoryModel;
 
 class FrontController extends Controller
 {
+    /** renders view of front page
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $feeds = FeedModel::getFeeds();
@@ -20,6 +23,9 @@ class FrontController extends Controller
         );
     }
 
+    /** calls filter or modal ajax processes
+     * @param \Illuminate\Http\Request $request
+     */
     public function ajaxProcess(\Illuminate\Http\Request $request)
     {
         if ($request->action == 'processFilter') {
@@ -31,6 +37,9 @@ class FrontController extends Controller
         }
     }
 
+    /** category filter
+     * @param $request
+     */
     public function processFilter($request)
     {
         $filter_categories = array_map('intval', (array)json_decode($request->filters));
@@ -50,6 +59,9 @@ class FrontController extends Controller
         );
     }
 
+    /** opens modal with rendered content
+     * @param $request
+     */
     public function processOpenModal($request)
     {
         $id_feed = (int)$request->id_feed;

@@ -13,12 +13,19 @@ class CategoryModel extends Model
      */
     protected $table = 'category';
 
+    /** get categories only related to feeds
+     * @return mixed
+     */
     public static function getFeedCategories()
     {
         return self::join('feed_category', '.category.id', '=', 'feed_category.category_model_id')
             ->pluck('category.name', 'category.id');
     }
 
+    /** get categories by feed id, used in multi selectbox
+     * @param $id_feed
+     * @return mixed
+     */
     public static function getFeedCategoriesByFeedId($id_feed)
     {
         return self::join('feed_category', '.category.id', '=', 'feed_category.category_model_id')

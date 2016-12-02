@@ -8,7 +8,10 @@ use Config;
 class FeedModel extends Model
 {
     protected $table = 'feed';
-    
+
+    /** gets text in <title></title> tags on given url
+     * @return mixed|string
+     */
     public function getTitle()
     {
         $url = $this->link;
@@ -30,18 +33,9 @@ class FeedModel extends Model
         }
     }
 
-    public function getLink()
-    {
-        $url = $this->link;
-
-        $link_start = '';
-
-        if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
-            $link_start = "https://";
-        }
-        return $link_start.$url;
-    }
-
+    /** get active, ordered feeds with pagination
+     * @return mixed
+     */
     public static function getFeeds()
     {
         return self::orderBy('updated_at', 'desc')
@@ -49,6 +43,10 @@ class FeedModel extends Model
             ->paginate(Config::get('constants.PAGE_COUNT'));
     }
 
+    /** get active, ordered feeds with ajax call
+     * @param array $feed_ids
+     * @return array
+     */
     public static function getAjaxFeeds($feed_ids = [])
     {
         if (empty($feed_ids)) {
@@ -61,6 +59,10 @@ class FeedModel extends Model
 
     }
 
+    /** get only feed id's
+     * @param array $category_ids
+     * @return array
+     */
     public static function getFeedIds($category_ids = [])
     {
         if (empty($category_ids)) {

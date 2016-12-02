@@ -12,6 +12,9 @@ use Route;
 
 class CategoryController extends Controller
 {
+    /** renders admin category CRUD view
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $categoryModel = new CategoryModel();
@@ -23,6 +26,10 @@ class CategoryController extends Controller
         ]);
     }
 
+    /** renders add category form view
+     * @param int $id_category
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function addCategoryView($id_category = 0)
     {
         $categoryModel = CategoryModel::find($id_category);
@@ -35,6 +42,10 @@ class CategoryController extends Controller
         );
     }
 
+    /** validate form request
+     * @param \Illuminate\Http\Request $request
+     * @return Redirect
+     */
     public function addFeedCategoryAction(\Illuminate\Http\Request $request)
     {
         $this->validate($request, [
@@ -44,6 +55,11 @@ class CategoryController extends Controller
         return $this->addOrUpdate($request, (int)$request->id_category);
     }
 
+    /** adds or updates category table
+     * @param $request
+     * @param int $id_category
+     * @return Redirect
+     */
     public function addOrUpdate($request, $id_category = 0)
     {
         if (!$id_category) {
@@ -73,6 +89,9 @@ class CategoryController extends Controller
         return Redirect('categories');
     }
 
+    /** removes category from category table and from feed_category table
+     * @return Redirect
+     */
     public function removeCategoryAction()
     {
         $id_category = (int)Route::current()->getParameter('id');
@@ -93,7 +112,6 @@ class CategoryController extends Controller
 
         Session::flash('success_message', Config::get('constants.SUCCESS_DELETE'));
         return Redirect('categories');
-
     }
 }
 
